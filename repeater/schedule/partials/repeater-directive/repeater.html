@@ -1,0 +1,51 @@
+<!--
+		<select ng-model="data.repeatFormat">
+		  <option ng-value="format.value" ng-title="format.title" ng-selected="format.value==data.repeatFormat" ng-repeat="format in models.repeatFormats">{{format.title}}</option>
+		</select>
+!-->
+
+<!---- ----->
+<div class="well well-small">
+    <div class="form-group">
+        <label>Repeats Every</label>
+        <select ng-model="data.repeatWeeks" ng-change="summaryBuilder()">
+            <option ng-repeat="week in models.weeks">{{week}}</option>
+        </select>
+        Weeks
+    </div>
+    <div class="form-group">
+        <label>Repeats On </label>              	
+		<span>
+			<span ng-repeat="day in models.days">
+			  	<input name="day.name" title="day.title" type="checkbox" ng-model="day.checked"
+                       ng-change="selectedDays();summaryBuilder();">
+				<label title="day.title">{{day.label}}</label>
+			</span>
+		</span>
+    </div>
+    <div class="form-group">
+        <label>Ends</label><br/>
+        <input type="radio" ng-model="data.endFormat" value="number" ng-change="summaryBuilder()"> After <input
+            type="number" ng-model="data.times" ng-change="summaryBuilder()" ng-click="data.endFormat='number'">
+        Occurrences<br/>
+        <input type="radio" ng-model="data.endFormat" value="date" ng-change="summaryBuilder()"> On <input type="text"
+                                                                                                           ui-date
+                                                                                                           ui-date-format="mm/dd/yy"
+                                                                                                           ng-model="data.endDate"
+                                                                                                           ng-change="summaryBuilder()"
+                                                                                                           ng-click="data.endFormat='date'"><br/>
+        <input type="radio" ng-model="data.endFormat" value="yearly" ng-change="summaryBuilder()"> After 1 year<br/>
+    </div>
+    <div id="summary">
+        {{data.summary}}
+    </div>
+    <hr/>
+    <form role="form">
+        <button type="submit" class="btn btn-primary" ng-click="buildDates()">Done</button>
+        <button type="submit" class="btn btn-danger" ng-click="dates=[]">Cancel</button>
+    </form>
+    <pre>{{dates}}</pre>
+
+</div>
+
+

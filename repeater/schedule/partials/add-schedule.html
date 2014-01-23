@@ -1,0 +1,70 @@
+<div class="tab-content">
+    <div class="tab-pane active" id="daily">
+        <h2>Team Scheduler {{test}}</h2>
+        <hr/>
+        <div class="row care-actions">
+            <!-- left panel -->
+            <div class="col-xs-12 col-sm-6">
+                <h3>Add Schedule</h3>
+
+                <p>Select Caregiver</p>
+                <select ng-model="data.user"
+                        ng-options="user.first_name +' '+user.last_name for user in data.users | orderBy:'first_name'"></select>
+                <br/>
+                <br/>
+
+                <p>Select patient</p>
+                <select ng-model="data.patient"
+                        ng-options="patient.first_name +' '+patient.last_name for patient in data.patients | orderBy:'first_name'"></select>
+
+                <p>Select Date</p>
+
+                <div class="well well-small" ng-model="data.shift.date[0]" style="display:inline-block;">
+                    <datepicker min="minDate"></datepicker>
+                    <br/>
+                    <input type="checkbox" ng-model="data.show.repeat" > Repeat
+                    <div ng-show="data.show.repeat">
+                        <schedule-repeater startdate="data.shift.date[0]" result="data.shift.date"></schedule-repeater>
+                    </div>
+                </div>
+
+                <p>Enter Shift Start and End Times</p>
+
+                <div ng-model="data.shift.start" class="well well-small" style="display:inline-block;">
+                    <timepicker show-meridian="true"></timepicker>
+                </div>
+                <div ng-model="data.shift.end" class="well well-small" style="display:inline-block;">
+                    <timepicker show-meridian="true"></timepicker>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary" ng-click="add()">Add <span
+                        class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+            <!-- right panel -->
+            <div class="col-xs-12 col-sm-6" ng-show="true">
+                <p>Select a Caregiver to view their schedule</p>
+            </div>
+
+            <!-- Should only appear once the caregiver is selected -->
+            <div class="col-xs-12 col-sm-6" ng-show="true">
+                <div>
+                    <div ng-repeat="caregiver in data.schedule">
+                        <div ng-show="caregiver.first_name == data.user.first_name">
+                            <h3>{{caregiver.first_name}}'s Current Schedule</h3>
+                            <hr/>
+                            <div ng-repeat="event in caregiver.schedule | orderBy:'event.start_time'">
+                                <p>{{event.patient.first_name}} {{event.patient.last_name}} -- {{event.event.start_time
+                                    | date:'h:mm a' }}-{{event.event.end_time | date:'h:mm a' }}
+                                    <button class="btn-danger pull-right" ng-click="remove(event._id)"><span
+                                            class="glyphicon glyphicon glyphicon-remove"></span></button>
+                                </p>
+                                <hr/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

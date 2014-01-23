@@ -1,0 +1,45 @@
+An Introduction to Angular JS Directives 
+by Spencer Sims
+
+Directives are to Angular what bricks are to a house
+	They are the fundemntal blocks that makes angular work
+
+Made something with Angular? You've used a directive! 
+	<!DOCTYPE html>
+	<html ng-app="CLOCK">
+		<head>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+			<script type="text/javascript" src="ui-bootstrap-tpls-0.3.0.min.js"></script>
+			<script src="app.js"></script>
+			<script src="controllers.js"></script>
+			<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+			<link href="app.css" rel="stylesheet">
+		</head>
+		<body class="container-fluid" >
+			<div ng-view></div>
+		</body>
+	</html>
+
+	Any attribute with an 'ng' in it is a directive (ng-app,ng-view,ng-controller,ng-repeat) 
+
+DeMystifing Directives 
+	A directive is just a function that is ran when the compiler encounters it in the DOM. 
+	
+	A directive can look four diffrent ways: 
+		As an Attribute	(A) <div my-directive="expression"></div>
+		As an Element 	(E) <my-directive></my-directive>
+		As a Class	(C) <div class="my-directive: expression;"></div>
+		As a Comment	(M) <!-- directive: my-directive expression -->
+
+	As you can see they "extend the vocabulary of HTML" 
+
+	An Interoplation Directive Looks like {{X}} 
+	
+Creating Your Own Directives: 
+	Why? Beacuse you can extend HTML to be declarative in nature (you can look at the code and know exactly what that element does, you don't have to search around for it)
+	
+	Quick Example: Word Clock
+	
+	
+	

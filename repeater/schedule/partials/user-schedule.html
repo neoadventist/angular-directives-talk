@@ -1,0 +1,24 @@
+<!-- Show if there is no schedule -->
+<br/><br/>
+<div style="text-align: center" class="tab-content" ng-hide=data.user.schedule>
+    <div class="tab-pane active">
+        <h3>You have no scheduled patient visits.</h3>
+    </div>
+</div>
+
+<!-- Show if there is a schedule -->
+<div class="tab-content" ng-show=data.user.schedule>
+    <div class="tab-pane active">
+        <div class="row" ng-repeat="event in data.user.schedule | orderBy:'event.start_time'">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <button class="btn btn-block btn-primary" ng-click="go(event.patient.id, $index)">
+                    <h3>{{event.patient.first_name}} {{event.patient.last_name}}</h3>
+                    <p>{{event.event.start_time}} to {{event.event.end_time}}</p>
+                </button>
+                <br/>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>

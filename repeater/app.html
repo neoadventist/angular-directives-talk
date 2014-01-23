@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="app" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Calendar Repeater Directive Example</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="common/frameworks/bootstrap/3.0/css/bootstrap.min.css">
+    <!-- JQuery UI -->
+    <link rel="stylesheet" href="common/stylesheets/jquery-ui/jquery-ui.css"/>
+    <!-- Custom Styles Loaded Last!! -->
+    <link rel="stylesheet" href="common/stylesheets/style.css"/>
+    <!-- JQuery -->
+    <script src="common/frameworks/jquery/jquery-1.9.1.js"></script>
+
+    <!-- JQuery-UI -->
+    <script src="common/frameworks/jquery-uis/jquery-ui.js"></script>
+
+    <!-- Angular -->
+    <script src="common/frameworks/angular/1.0.8/angular.min.js"></script>
+    <script src="common/frameworks/angular-cookies/1.0.8/angular-cookies.min.js"></script>
+    <script src="app.js"></script>
+    <!-- UI-Date -->
+    <script src="common/frameworks/ui-date/js/date.js"></script>
+    <!-- UI Bootstrap -->
+    <script src="common/frameworks/ui-bootstrap/0.7.0/js/ui-bootstrap-custom-tpls-0.7.0.js"></script>
+    <!-- Moment JS -->
+    <script src="common/frameworks/moment/2.5.0/moment.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body ng-controller="main">
+
+                <div class="well well-small" ng-model="data.shift.date[0]" style="display:inline-block;">
+                    <datepicker min="minDate"></datepicker>
+                    <br/>
+                 
+                </div>
+
+                        <schedule-repeater startdate="data.shift.date[0]" result="data.shift.date"></schedule-repeater>
+                   	 
+
+<!-- Bootstrap -->
+<script src="common/frameworks/bootstrap/3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

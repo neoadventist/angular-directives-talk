@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+	<link href="css/impress-demo.css" rel="stylesheet" />
+	<link href="css/mycss.css" rel="stylesheet" />
+</head>
+<body>
+
+<div id="impress">
+	<div id="intro" class="step slide" data-x="-1000" data-y="-1500">
+	<div style="font-size:70px; line-height:100px; text-align:center">An Introduction to Angular JS Directives </div>
+	<div style="font-size:50px; line-height:100px; text-align:center">by Spencer Sims</div>
+	</br>
+	<div style="font-size:70px; line-height:100px; text-align:center">http://spencersims.com/presentations/directives</div>
+		
+	</div>
+
+	<div id="def" class="step slide" data-x="0" data-y="-1500">
+	Directives are to Angular what bricks are to a house
+		<img src="images/bricks.jpg" style="width:100%;height:100%" />
+	</div>
+
+	<div id="blocks" class="step" data-x="0" data-y="-600">
+		<h2>They are the fundemntal blocks that gives Angular it's Superheroic Powers!</h2>
+	</div>
+
+	<div id="you-used" class="step" data-x="0" data-y="-300">
+		<h2>Made something with Angular? You've used a directive! </h2>
+	</div>
+
+	<div id="sample-app" class="step" data-x="400" data-y="-300" data-scale="4">
+				<code>
+					<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html ng-app="CLOCK"&gt;
+&lt;head&gt;
+&lt;script src="angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;link href="bootstrap-combined.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body class="container-fluid" &gt;
+&lt;div ng-controller="sample" &gt;
+   &lt;h1 ng-init="text='Hello World' "&gt;
+     {{text}}
+   &lt;/h1&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+					</pre>
+				</code>
+	</div>
+	
+	<div id="attribue" class="step" data-x="400" data-y="200" data-scale="4">
+		Any attribute with an 'ng' in it is a directive (ng-app,ng-view,ng-controller,ng-repeat) 
+	</div>
+
+	<div id="demystify" class="step" data-x="500" data-y="200" data-rotate-y="45" data-rotate="0">
+		<h2 class="header">DeMystifing Directives</h2>
+	</div>
+
+	<div id="directive-fcn" class="step" data-x="500" data-y="500" data-rotate-y="45" data-rotate="0">
+		A directive is just a function that is ran when the compiler encounters it in the DOM.
+	</div>
+
+	<div id="directive-look" class="step" data-x="500" data-y="1100" data-rotate-y="45" data-rotate-z="90">
+		<h3>All of the following are equivilant:</h3>
+		<ul>As an Attribute	(A) <code>&lt;div my-directive="expression"&gt;&lt;/div&gt;</code></ul>
+		<ul>As an Element 	(E) <code>&lt;my-directive&gt;&lt;/my-directive&gt;</code></ul>
+		<ul>As a Class		(C) <code>&lt;div class="my-directive: expression;"&gt;&lt;/div&gt;</code></ul>
+		<ul>As a Comment	(M) <code>&lt;!-- directive: my-directive expression --&gt;</code></ul>
+	</div>
+
+	<div id="directive-extend-vocabulary" class="step" data-x="-400" data-y="1300" data-rotate-y="45" data-rotate-z="90" data-scale="1">
+		As you can see they "extend the vocabulary of HTML" 
+	</div>
+
+	<div id="create-own-directive" class="step" data-x="-200" data-y="1000" data-rotate-y="0" data-rotate-z="0">
+		<h2>Creating Your Own Directives:</h2>
+		<hr/>
+		<p>Why? Beacuse you can <strong>extend HTML</strong> to be declarative in nature (you can look at the code and know exactly what that element does, you don't have to search around for it)</p>
+	</div>
+
+	<div id="create-own-directive-clock" class="step slide" data-x="-200" data-y="900" data-rotate-y="90" data-rotate-z="0">
+		<h2>Quick Example: <a href="clock/index.html">World Clock</a></h2>
+		<img src="images/vinylclock.jpg" style="width:90%;height:90%" />
+	</div>
+
+	<div id="create-own-directive-clock-html-source" class="step slide" data-x="-200" data-y="0" data-rotate-y="90" data-rotate-z="0">
+	<pre style=" word-wrap: break-word;">
+	<code style="height:100%; width:100%; word-wrap: break-word;">
+&lt;div class="row-fliid"&gt;
+ &lt;time text="Half" glow="30"  
+	hour="hour" minute="minute" 
+	class="span3"&gt;&lt;/time&gt;
+	&lt;time text="Ten" ...&lt;/time&gt;
+&lt;/div&gt;
+	</code>
+	</pre>
+	Notice the unique Attributes!
+	</div>
+
+	<div id="create-own-directive-clock-directive-source-I" class="step " data-x="-200" data-y="-900" data-rotate-y="90" data-rotate-z="0">
+	Setting up the Awesomeness!
+		<pre>
+			<code>
+app.directive('time', function() {
+    return {
+	scope: {
+		   text: '@text',
+		   glow: '=',
+		   hour: '=',
+		   minute: '='
+        },
+        controller: function ($scope, $element, $attributes,) {
+        },
+        replace: false,
+	restrict: 'EA',
+	...
+			</code>
+		</pre>
+	</div>
+
+	<div id="create-own-directive-clock-directive-source-II" class="step " data-x="-200" data-y="-1900" data-rotate-y="90" data-rotate-z="0">
+	<pre>
+		<code>
+link: function(scope, element, attrs) {
+scope.$watch('minute', function(newValue) {
+	var h = scope.hour;
+	var n = scope.minute;
+	var g = scope.glow;
+	scope.glowClass="yellow";
+	...
+		</code>
+	</pre>
+
+	</div>
+
+	<div id="create-own-directive-clock-directive-source-III" class="step " data-x="-200" data-y="-2700" data-rotate-y="90" data-rotate-z="0">
+	<pre>
+		<code>
+...
+switch (true){
+case (n>=0 && n<5) && (g=="h"):
+scope.glowClass="red";
+break;
+... ...
+}
+if(scope.glow==h || scope.text=="It Is" ){
+scope.glowClass="red";
+}
+}, false);
+}
+		</code>
+	</pre>
+
+	</div>
+
+	<div id="create-own-directive-clock-directive-source-IV" class="step " data-x="-200" data-y="-3400" data-rotate-y="90" data-rotate-z="0">
+	<pre>
+		<code>
+,template: '&lt;h1 class="{{glowClass}}"&gt;{{text}}&lt;/h1&gt;'
+		</code>
+	</pre>
+Or you can pass in a URL
+	<pre>
+		<code>
+,templateUrl: '/partials/template.html'
+		</code>
+	</pre>
+
+	</div>
+
+	<div id="repeater-directive-link" class="step " data-x="-200" data-y="-4000" data-rotate-y="90" data-rotate-z="0">
+		A more complex <a href="repeater/app.html">example</a>
+	</div>
+
+	<div id="finished" class="step " data-x="0" data-y="0" data-rotate-y="0" data-rotate-z="0" data-scale="7">
+		Any Questions? 
+	</div>
+
+</div>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+</body>
+</html>
